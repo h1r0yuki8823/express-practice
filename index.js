@@ -1,10 +1,16 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var ejs = require("ejs");
+var app = express();
 
-app.get('/', (req, res) => {
-    res.send('Welcome to Express!')
-})
 
-app.listen(3000, () => {
-    console.log('Start server post:3000')
+app.engine('ejs' ,ejs.renderFile);
+
+app.get("/", (req, res) => {
+    res.render('index.ejs',
+        {title: 'Index',
+            content: 'This is Express-app Top page!'});
+});
+
+var server = app.listen(3000,() => {
+    console.log('Server is running!');
 })
